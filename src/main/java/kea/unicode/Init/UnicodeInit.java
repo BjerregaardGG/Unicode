@@ -5,6 +5,7 @@ import kea.unicode.Repository.Repository;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.stereotype.Component;
 
+import javax.xml.stream.events.Characters;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -15,6 +16,15 @@ public class UnicodeInit implements CommandLineRunner {
 
     public UnicodeInit(Repository repository) {
         this.repository = repository;
+    }
+
+    // metode hvis man allerede har et foruddefineret Set med Char værdier (ellers løsning nedenfor)
+    public void addUnicodeCharacters(Set<Character> characters) {
+        for (Character c : characters) {
+            int i = (int) c;
+            Unicode unicode = new Unicode(i, c, "x");
+            repository.save(unicode);
+        }
     }
 
     @Override
@@ -35,6 +45,5 @@ public class UnicodeInit implements CommandLineRunner {
             Unicode unicode = new Unicode(i, c, "x");
             repository.save(unicode);
         }
-
     }
 }
