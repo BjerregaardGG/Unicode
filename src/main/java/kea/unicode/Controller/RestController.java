@@ -37,6 +37,7 @@ public class RestController {
         return repository.findAll();
     }
 
+    // tilføj evt ResponseEntity<> her
     @PostMapping("/description/{unicodeId}")
     public void editDescription(@PathVariable Integer unicodeId, @RequestBody Unicode unicode ) {
         Unicode uni = repository.findById(unicodeId).orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND));
